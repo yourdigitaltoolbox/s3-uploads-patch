@@ -60,9 +60,9 @@ class Plugin
         if (!function_exists('is_plugin_active'))
             require_once(ABSPATH . '/wp-admin/includes/plugin.php');
 
-        if (!is_plugin_active('s3-uploads/s3-uploads.php')) {
+        if (!file_exists(WPMU_PLUGIN_DIR . '/s3-uploads/s3-uploads.php') && !is_plugin_active('s3-uploads/s3-uploads.php')) {
             add_action('admin_notices', function () {
-                echo '<div class="notice notice-error"><p>S3 Uploads must be installed and activated for S3-Uploads-Patch plugin to work.</p></div>';
+                echo '<div class="notice notice-error"><p>S3 Uploads must be installed and activated in either the plugins or mu-plugins directory for S3-Uploads-Patch plugin to work.</p></div>';
             });
             return false;
         }
